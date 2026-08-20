@@ -36,10 +36,16 @@ func LoadConfig() {
 		sslMode = "disable"
 	}
 
+	port := os.Getenv("PORT")
+
+	if port ==""{
+		port = "8080"
+		}
+
 	App = Config{
 		AppName:     os.Getenv("APP_NAME"),
 		AppEnv:      os.Getenv("APP_ENV"),
-		AppPort:     os.Getenv("APP_PORT"),
+		AppPort:     port,
 		DBHost:      os.Getenv("DB_HOST"),
 		DBPort:      os.Getenv("DB_PORT"),
 		DBUser:      os.Getenv("DB_USER"),
