@@ -20,6 +20,7 @@ type Config struct {
 	DBName      string
 	JWTSecret   string
 	FrontendURL string
+	DBSSLMode   string
 }
 
 var App Config
@@ -27,6 +28,12 @@ var App Config
 func LoadConfig() {
 	if err := godotenv.Load(); err != nil {
 		log.Println("Warning: .env file not found. Using system environment variables.")
+	}
+	sslMode :=
+		os.Getenv("DB_SSLMODE")
+
+	if sslMode == "" {
+		sslMode = "disable"
 	}
 
 	App = Config{
@@ -38,6 +45,7 @@ func LoadConfig() {
 		DBUser:      os.Getenv("DB_USER"),
 		DBPassword:  os.Getenv("DB_PASSWORD"),
 		DBName:      os.Getenv("DB_NAME"),
+		DBSSLMode:   sslMode,
 		JWTSecret:   os.Getenv("JWT_SECRET"),
 		FrontendURL: os.Getenv("FRONTEND_URL"),
 	}
