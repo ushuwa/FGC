@@ -23,7 +23,6 @@ import {
 } from "@mui/material";
 
 import {
-  AssessmentOutlined,
   DashboardOutlined,
   GroupOutlined,
   Logout,
@@ -31,6 +30,7 @@ import {
   PeopleAltOutlined,
   WarningAmberOutlined,
   AccountBalanceOutlined,
+  PictureAsPdfOutlined,
 } from "@mui/icons-material";
 
 import {
@@ -78,8 +78,8 @@ const navigationItems: NavigationItem[] = [
   },
   {
     label: "Reports",
-    icon: <AssessmentOutlined />,
     path: "/reports",
+    icon: <PictureAsPdfOutlined />,
   },
 ];
 

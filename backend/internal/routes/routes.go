@@ -31,4 +31,17 @@ func Setup(
 		v1,
 		c.LoanHandler,
 	)
+	DashboardRoutes(
+		v1,
+		c.DashboardHandler,
+	)
+	PARRoutes(
+		v1,
+		c.PARHandler,
+	)
+
+	RegisterReportRoutes(
+		v1,
+		c.ReportHandler,
+	)
 }

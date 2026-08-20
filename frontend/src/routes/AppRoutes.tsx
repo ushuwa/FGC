@@ -14,6 +14,8 @@ import ClientDetailsPage from "../pages/clients/ClientDetailsPage";
 import ClientProfilePage from "../pages/clients/ClientProfilePage";
 import LoanManagementPage from "../pages/loans/LoanManagementPage";
 import LoanProfilePage from "../pages/loans/LoanProfilePage";
+import PortfolioPage from "../pages/portfolio/PortfolioAtRiskPage";
+import ReportPage from "../pages/reports/ReportsPage";
 
 export default function AppRoutes() {
   return (
@@ -82,6 +84,22 @@ export default function AppRoutes() {
             path="loans/:id"
             element={
               <LoanProfilePage />
+            }
+          />
+
+          {/* Portfolio */}
+          <Route
+            path="portfolio-risk"
+            element={
+              <PortfolioPage />
+            }
+          />
+
+          {/* Reports */}
+          <Route
+            path="reports"
+            element={
+              <ReportPage />
             }
           />
 

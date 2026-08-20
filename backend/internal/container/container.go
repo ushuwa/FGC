@@ -7,9 +7,12 @@ import (
 )
 
 type Container struct {
-	AuthHandler   *handlers.AuthHandler
-	ClientHandler *handlers.ClientHandler
-	LoanHandler   *handlers.LoanHandler
+	AuthHandler      *handlers.AuthHandler
+	ClientHandler    *handlers.ClientHandler
+	LoanHandler      *handlers.LoanHandler
+	DashboardHandler *handlers.DashboardHandler
+	PARHandler       *handlers.PARHandler
+	ReportHandler    *handlers.ReportHandler
 }
 
 func BuildContainer() *Container {
@@ -26,6 +29,15 @@ func BuildContainer() *Container {
 
 	loanRepository :=
 		repositories.NewLoanRepository()
+
+	dashboardRepository :=
+		repositories.NewDashboardRepository()
+
+	parRepository :=
+		repositories.NewPARRepository()
+
+	reportRepository :=
+		repositories.NewReportRepository()
 
 	// =========================
 	// SERVICES
@@ -46,6 +58,22 @@ func BuildContainer() *Container {
 			loanRepository,
 		)
 
+	dashboardService :=
+		services.NewDashboardService(
+			dashboardRepository,
+		)
+	parService :=
+		services.NewPARService(
+			parRepository,
+		)
+
+	reportService :=
+		services.NewReportService(
+			reportRepository,
+		)
+	reportPDFService :=
+		services.NewReportPDFService("./storage/reports")
+
 	// =========================
 	// HANDLERS
 	// =========================
@@ -65,13 +93,32 @@ func BuildContainer() *Container {
 			loanService,
 		)
 
+	dashboardHandler :=
+		handlers.NewDashboardHandler(
+			dashboardService,
+		)
+
+	parHandler :=
+		handlers.NewPARHandler(
+			parService,
+		)
+
+	reportHandler :=
+		handlers.NewReportHandler(
+			reportService,
+			reportPDFService,
+		)
+
 	// =========================
 	// CONTAINER
 	// =========================
 
 	return &Container{
-		AuthHandler:   authHandler,
-		ClientHandler: clientHandler,
-		LoanHandler:   loanHandler,
+		AuthHandler:      authHandler,
+		ClientHandler:    clientHandler,
+		LoanHandler:      loanHandler,
+		DashboardHandler: dashboardHandler,
+		PARHandler:       parHandler,
+		ReportHandler:    reportHandler,
 	}
 }
